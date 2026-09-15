@@ -129,7 +129,7 @@ export async function processCoachRequest(params: CoachRequestParams) {
   promptContext += `\nPlease generate the next response as the supportive cover-letter coach following all instructions and boundaries, returning strictly valid JSON.`;
 
   // Try models in order of preference with retry
-  const modelsToTry = ['gemini-3.8-flash', 'gemini-flash-latest', 'gemini-3.1-flash-lite'];
+  const modelsToTry = ['gemini-3.6-flash', 'gemini-3.8-flash', 'gemini-flash-latest', 'gemini-3.1-flash-lite'];
   let rawText = '';
   let lastError: any = null;
 

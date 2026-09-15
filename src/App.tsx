@@ -78,8 +78,14 @@ export default function App() {
       });
 
       if (!res.ok) {
-        const errData = await res.json().catch(() => ({}));
-        throw new Error(errData.error || `Server responded with status ${res.status}`);
+        let errMessage = '';
+        try {
+          const errData = await res.json();
+          errMessage = errData.error || errData.message;
+        } catch {
+          errMessage = await res.text().catch(() => '');
+        }
+        throw new Error(errMessage || `Server responded with status ${res.status}`);
       }
 
       const data: CoachApiResponse = await res.json();
