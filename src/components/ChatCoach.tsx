@@ -120,11 +120,35 @@ export const ChatCoach: React.FC<ChatCoachProps> = ({
                   }`}
                 >
                   {isAssistant ? (
-                    <div className="prose prose-stone prose-xs sm:prose-sm max-w-none prose-p:my-1 prose-ul:my-1 prose-li:my-0.5 prose-strong:text-stone-900">
-                      <ReactMarkdown>{msg.content}</ReactMarkdown>
+                    <div className="text-stone-800 space-y-2">
+                      <ReactMarkdown
+                        components={{
+                          p: ({ children }) => <p className="my-1.5 leading-relaxed">{children}</p>,
+                          strong: ({ children }) => <strong className="font-semibold text-stone-900">{children}</strong>,
+                          em: ({ children }) => <em className="italic text-stone-700">{children}</em>,
+                          ul: ({ children }) => <ul className="list-disc list-outside ml-4 my-2 space-y-1">{children}</ul>,
+                          ol: ({ children }) => <ol className="list-decimal list-outside ml-4 my-2 space-y-1.5">{children}</ol>,
+                          li: ({ children }) => <li className="leading-relaxed pl-0.5">{children}</li>,
+                          h1: ({ children }) => <h1 className="text-sm font-bold text-stone-900 mt-2.5 mb-1">{children}</h1>,
+                          h2: ({ children }) => <h2 className="text-xs font-bold text-stone-900 mt-2 mb-1">{children}</h2>,
+                          h3: ({ children }) => <h3 className="text-xs font-semibold text-stone-900 mt-1.5 mb-0.5">{children}</h3>,
+                          blockquote: ({ children }) => (
+                            <blockquote className="border-l-2 border-amber-400 pl-2.5 py-0.5 my-1.5 text-stone-600 italic bg-amber-50/50 rounded-r">
+                              {children}
+                            </blockquote>
+                          ),
+                          code: ({ children }) => (
+                            <code className="bg-stone-200/80 px-1 py-0.5 rounded text-[11px] font-mono text-stone-800">
+                              {children}
+                            </code>
+                          ),
+                        }}
+                      >
+                        {msg.content}
+                      </ReactMarkdown>
                     </div>
                   ) : (
-                    <div className="whitespace-pre-wrap">{msg.content}</div>
+                    <div className="whitespace-pre-wrap leading-relaxed">{msg.content}</div>
                   )}
                 </div>
               </div>
